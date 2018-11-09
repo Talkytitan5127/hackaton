@@ -115,15 +115,27 @@ class Sudoku:
 
     def set_value(self, st, col, value):
         self.user_grid[st][col] = value
+
+    def pprint(self):
+        num = '   1 2 3 4 5 6 7 8 9'
+        print(num)
+        print(' ', '-'*19)
+        string = "{} |{} {} {}|{} {} {}|{} {} {}|"
+        aab = 'ABCDEFGHI'
+        
+        count = 1
+        for i in range(self.length):
+            print(string.format(aab[i], *self.user_grid[i]))
+            if not count % 3:
+                print(' ','-'*19)
+            count += 1
+        
+
         
 
 
 if __name__ == '__main__':
     obj = Sudoku()
     obj.mix_user_grid()
-    print("USER")
-    for i in obj.user_grid:
-        print(i)
-    print('#'*10)
-    for i in obj.grid:
-        print(i)
+    obj.pprint()
+    
