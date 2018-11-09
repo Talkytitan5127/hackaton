@@ -75,14 +75,16 @@ class Sudoku:
         self.grid = grid.get()
         self.user_grid = copy.deepcopy(self.grid)
         self.size = grid.size
+        self.length = self.size * self.size
+
+        self.mix_user_grid()
     
     def mix_user_grid(self):
-        length = self.size*self.size
-        flook = [[0]*length for i in range(length)]
+        flook = [[0]*self.length for i in range(self.length)]
         iterator = 0
-        difficult = length**2
+        difficult = self.length**2
         while iterator < difficult:
-            i, j = random.randrange(0, length, 1), random.randrange(0, length, 1)
+            i, j = random.randrange(0, self.length, 1), random.randrange(0, self.length, 1)
             if not flook[i][j]:
                 iterator += 1
                 flook[i][j] = 1
@@ -93,7 +95,7 @@ class Sudoku:
                 difficult -= 1
 
                 table_solution = []
-                for copy_i in range(0, length):
+                for copy_i in range(0, self.length):
                     table_solution.append(self.user_grid[copy_i][:])
                 
                 i_solution = 0
@@ -103,6 +105,17 @@ class Sudoku:
                 if i_solution != 1:
                     self.user_grid[i][j] = temp
                     difficult += 1
+
+    def check_game(self):
+        for i in range(self.length):
+            for j in range(self.length):
+                if self.grid[i][j] != self.user_grid[i][j]:
+                    return False
+        return True
+
+    def set_value(self, st, col, value):
+        self.user_grid[st][col] = value
+        
 
 
 if __name__ == '__main__':
