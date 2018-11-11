@@ -7,7 +7,7 @@ NAME = "SUDOKU"
 
 class Game(BaseGame.BaseGame):    
     def run(self):
-        Wrapper(self.__name)
+        Wrapper()
         
 
 class Wrapper():
